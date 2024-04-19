@@ -111,26 +111,6 @@ class: title-slide, left, bottom
 ### `r rmarkdown::metadata$institution`
 #### `r rmarkdown::metadata$event`, `r rmarkdown::metadata$date`
 
----
-# Background
-
---
-
-```{r, echo=FALSE, out.width="60%", fig.align="center"}
-knitr::include_graphics(c("img/crt-logo.jpg"))
-``` 
-
---
-
-*  Research: Neural networks from a statistical-modelling perspective
-
-
---
-
-```{r, echo=FALSE, out.width="70%", fig.align="center"}
-knitr::include_graphics(c("img/packages.png"))
-``` 
-
 
 ---
 
@@ -161,6 +141,87 @@ knitr::include_graphics("img/nneq1.png")
 ]
 
 ---
+count: false
+# Feedforward Neural Networks 
+
+
+.left-column[
+```{r, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("img/fnn-1.jpg")
+```
+]
+
+<br>
+
+
+.right-column[ 
+```{r, echo=FALSE, out.width="95%", out.height="100%", fig.align="right"}
+knitr::include_graphics("img/nneq2.png")
+```  
+]
+
+---
+count: false
+# Feedforward Neural Networks 
+
+
+.left-column[
+```{r, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("img/fnn-1.jpg")
+```
+]
+
+<br>
+
+
+.right-column[ 
+```{r, echo=FALSE, out.width="95%", out.height="100%", fig.align="right"}
+knitr::include_graphics("img/nneq3.png")
+```  
+]
+
+---
+count: false
+# Feedforward Neural Networks 
+
+
+.left-column[
+```{r, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("img/fnn-1.jpg")
+```
+]
+
+<br>
+
+
+.right-column[ 
+```{r, echo=FALSE, out.width="95%", out.height="100%", fig.align="right"}
+knitr::include_graphics("img/nneq4.png")
+```  
+]
+
+---
+count: false
+# Feedforward Neural Networks 
+
+
+.left-column[
+```{r, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("img/fnn-1.jpg")
+```
+]
+
+<br>
+
+
+.right-column[ 
+```{r, echo=FALSE, out.width="95%", out.height="100%", fig.align="right"}
+knitr::include_graphics("img/nneq5.png")
+```  
+]
+
+
+---
 # Data Application 
 
 --
@@ -183,20 +244,6 @@ Response:
 
 `age,` `sex,` `bmi,` `children,` `smoker,` `region` 
 
----
-# Motivation
-
---
-
-```{r, echo=FALSE, out.width="75%", fig.align="center"}
-knitr::include_graphics(c("img/insurance_mse_gam-1.png"))
-```
-
-
-
----
-class: inverse1 middle center subsection
-# Model Interpretation
 
 ---
 
@@ -217,6 +264,82 @@ summary(nn)
 cat(c(capture.output(summary(inn$nn))[-2], "[...]"),
     sep = "\n")
 ```
+
+
+
+---
+# Motivation
+
+--
+
+```{r, echo=FALSE, out.width="75%", fig.align="center"}
+knitr::include_graphics(c("img/insurance_mse_gam-1.png"))
+```
+
+
+
+---
+class: inverse1 middle center subsection
+# Model Interpretation
+
+---
+
+# Significance Testing
+
+--
+
+.pull-left[
+```{r, echo=FALSE, out.width="98.9%", fig.align="center"}
+knitr::include_graphics("img/fnn-1.jpg")
+``` 
+]
+
+---
+count: false
+# Significance Testing
+
+
+.pull-left[
+```{r, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("img/fnn2-1.jpg")
+``` 
+]
+
+--
+
+.pull-right[
+  Wald test:
+  
+  {{content}}
+  
+  ]
+
+--
+
+$$
+\begin{equation}
+ \omega_j = (\omega_{j1},\omega_{j2},\dotsc,\omega_{jq})^T
+\end{equation}
+$$
+{{content}}
+
+--
+
+$$
+\begin{equation}
+ H_0: \omega_j = 0
+\end{equation}
+$$
+{{content}}
+
+--
+
+$$
+\begin{equation}
+ (\hat{\omega}_{j} - \omega_j)^T\Sigma_{\hat{\omega}_{j}}^{-1}(\hat{\omega}_{j} - \omega_j) \overset{\mathcal{D}}{\longrightarrow} \chi^2_q
+\end{equation}
+$$
+{{content}}
 
 
 
@@ -291,9 +414,6 @@ knitr::include_graphics("img/PCE_children-1.png")
 class: inverse1 middle center subsection
 # Model Selection
 
-
-
-
 ---
 # Motivation
 
@@ -305,9 +425,143 @@ knitr::include_graphics(c("img/insurance_mse_gam-1.png"))
 
 
 
+
 ---
-class: selectnn-slide
-# Model Selection
+class: inverse1 middle center subsection
+## Penalised Selection
+
+
+---
+# Smooth Information Criterion
+
+--
+
+```{r, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics(c("img/sic-publication.png"))
+``` 
+
+
+---
+# Smooth Information Criterion
+
+$$
+ \text{BIC} = -2\ell(\theta) + \log(n) \left[ \sum_{j=1}^p |\beta_j|^0 + 1 \right]
+$$
+
+
+--
+
+Introduce "smooth BIC":
+
+--
+
+$$
+ \text{SBIC} = -2\ell(\theta) + \log(n) \left[ \sum_{j=1}^p \frac{{\beta_j^2}}{\beta_j^2 + \epsilon^2} + 1 \right]
+$$
+
+---
+# Smooth Information Criterion
+
+```{r, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics(c("img/smooth-l0.jpg"))
+``` 
+
+
+---
+# Extending to Neural Networks
+
+$$\mathbb{E}(y) = \text{NN}(X, \theta)$$
+
+--
+
+where
+
+$$\text{NN}(X, \theta) = \phi_o \left[ \gamma_0+\sum_{k=1}^q \gamma_k \phi_h \left( \sum_{j=0}^p \omega_{jk}x_{j}\right) \right]$$
+
+---
+# Extending to Neural Networks
+
+<br>
+
+<p style="font-size: 0.85em">
+$$
+ \text{SBIC} = -2\ell(\theta) + \log(n) \left[ \sum_{jk} \frac{\omega_{jk}^2}{\omega_{jk}^2 + \epsilon^2} + \sum_{k} \frac{\gamma_k^2}{\gamma_k^2 + \epsilon^2} + q + 1 \right]
+$$
+</p>
+
+
+---
+# Extending to Group Sparsity
+
+--
+
+.pull-left[
+```{r, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics(c("img/input-group.png"))
+```
+]
+
+--
+Single penalty:
+
+\begin{equation*}
+ \frac{\omega_{jk}^2}{\omega_{jk}^2 + \epsilon^2}
+\end{equation*}
+
+--
+
+Group penalty:
+
+$$
+ \text{card}(\omega_j) \times \frac{||\omega_j||_2^2}{||\omega_j||_2^2 + \epsilon^2} 
+$$
+
+
+
+
+---
+class: inputgroup-slide
+# Group Sparsity
+
+## Input-neuron penalization
+
+<p style="font-size: 0.78em">
+$$
+ \text{IN-SBIC} = -2\ell(\theta) + \log(n) \left[ q \times \sum_{j}\frac{||\omega_j||_2^2}{||\omega_j||_2^2 + \epsilon^2} + \sum_{k} \frac{\gamma_k^2}{\gamma_k^2 + \epsilon^2} + q + 1 \right]
+$$
+</p>
+
+where $\omega_{j} = (\omega_{j1},\omega_{j2},\dotsc,\omega_{jq})^T$ 
+
+
+
+---
+class: hiddengroup-slide
+# Group Sparsity
+
+
+
+## Hidden-neuron penalization
+
+
+
+<p style="font-size: 0.78em">
+$$
+ \text{HN-SBIC} = -2\ell(\theta) + \log(n) \left[ (p + 1) \times \sum_{k}\frac{||\theta^{(k)}||_2^2}{||\theta^{(k)}||_2^2 + \epsilon^2} + q + 1 \right]
+$$
+</p>
+
+
+where $\theta^{(k)} = (\omega_{1k},\omega_{2k},\dotsc,\omega_{pk}, \gamma_k)^T$
+
+
+---
+class: inverse1 middle center subsection
+## Stepwise Selection
+
+
+---
+# Stepwise Model Selection
 
 
 ```{r, echo=FALSE, out.width="90%", fig.align="center"}
@@ -317,7 +571,6 @@ knitr::include_graphics("img/modelsel.png")
 A Statistically-Based Approach to Feedforward Neural Network Model Selection (arXiv:2207.04248)
 
 ---
-class: selectnn-slide
 # Insurance: Model Selection 
 
 
